@@ -3,27 +3,47 @@ from flask import Flask, request
 app = Flask(__name__)
 pedidos = []
 productos = [
-    {"nombre": "Labial Matte", "precio": 120, "emoji": "💄"},
-    {"nombre": "Base Liquida", "precio": 250, "emoji": "✨"},
-    {"nombre": "Sombras Palette", "precio": 320, "emoji": "🎨"},
-    {"nombre": "Rimel Volumen", "precio": 150, "emoji": "👁️"},
-    {"nombre": "Rubor Rosado", "precio": 130, "emoji": "🌸"},
-    {"nombre": "Kit Brochas", "precio": 280, "emoji": "🖌️"},
+    {"nombre": "Labial Matte", "precio": 120},
+    {"nombre": "Base liquida", "precio": 250},
+    {"nombre": "Sombras Palette", "precio": 300},
+    {"nombre": "Rimel Volumen", "precio": 150},
+    {"nombre": "Rubor Rosado", "precio": 130},
+    {"nombre": "Kit Brochas", "precio": 280},
 ]
 
 @app.route("/")
-def home():
-    cards = ""
+def inicio():
+    tarjetas = ""
     for p in productos:
-        cards += f"""<div style="background:white;border-radius:20px;padding:20px;text-align:center;box-shadow:0 4px 15px #f8bbd0"><div style="font-size:50px">{p['emoji']}</div><h3>{p['nombre']}</h3><p style="color:#e91e63;font-weight:bold;font-size:20px">${p['precio']} MXN</p><form action="/pedir" method="post"><input type="hidden" name="producto" value="{p['nombre']}"><input name="cliente" placeholder="Tu nombre" required style="width:90%;padding:10px;border-radius:10px;border:1px solid #f8bbd0;margin:5px"><input name="telefono" placeholder="Tu WhatsApp" required style="width:90%;padding:10px;border-radius:10px;border:1px solid #f8bbd0;margin:5px"><button style="background:#e91e63;color:white;border:none;padding:12px 20px;border-radius:20px;width:95%;margin-top:5px;font-weight:bold">Pedir 💗</button></form></div>"""
-    return f"""<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Selin Beauty</title></head><body style="font-family:Arial;background:#fff0f5;margin:0;padding:20px"><div style="text-align:center"><h1 style="color:#e91e63;font-size:35px">💗 Selin Beauty 💗</h1><p>Maquillaje bonito, barato y con amor</p><a href="/admin" style="background:#333;color:white;padding:10px 20px;border-radius:20px;text-decoration:none">Ver Pedidos Admin</a></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px">{cards}</div><p style="text-align:center;margin-top:30px">Pedidos: {len(pedidos)} | Torreon 💗</p></body></html>"""
+        tarjetas += f"""<div style="background:white;padding:20px;border-radius:15px;text-align:center;box-shadow:0 2px 10px #f8bbd0;">
+        <h3 style="color:#d81b60;">{p['nombre']}</h3>
+        <p style="font-size:20px;">${p['precio']} MXN</p>
+        <form action="/pedir" method="POST">
+        <input type="hidden" name="producto" value="{p['nombre']}">
+        <input type="text" name="nombre" placeholder="Tu nombre" required style="padding:8px;border-radius:8px;border:1px solid pink;width:90%;"><br><br>
+        <button style="background:#ec407a;color:white;border:none;padding:10px 20px;border-radius:20px;">Pedir</button>
+        </form></div>"""
+    return f"""<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Selin Beauty</title></head>
+    <body style="font-family:Arial;background:#fce4ec;margin:0;padding:20px;">
+    <h1 style="text-align:center;color:#c2185b;">💄 Selin Beauty 💄</h1>
+    <p style="text-align:center;">Maquillaje bonito a buen precio</p>
+    <div style="display:grid;gap:15px;max-width:500px;margin:auto;">{tarjetas}</div>
+    </body></html>"""
 
 @app.route("/pedir", methods=["POST"])
 def pedir():
-    pedidos.append({"producto": request.form.get("producto"), "cliente": request.form.get("cliente"), "telefono": request.form.get("telefono")})
-    return f"""<html><body style="font-family:Arial;background:#fff0f5;text-align:center;padding:40px"><h1 style="color:#e91e63">Gracias {request.form.get('cliente')}! 💗</h1><p>Tu pedido de <b>{request.form.get('producto')}</b> fue recibido.</p><p>Te contactamos al {request.form.get('telefono')}</p><a href="/" style="background:#e91e63;color:white;padding:12px 25px;border-radius:20px;text-decoration:none">Volver a la tienda</a></body></html>"""
+    pedidos.append({"producto": request.form.get("producto"), "nombre": request.form.get("nombre")})
+    return f"""<html><body style="font-family:Arial;background:#fce4ec;text-align:center;padding:40px;">
+    <h1 style="color:#c2185b;">¡Gracias {request.form.get("nombre")}!</h1>
+    <p>Tu pedido de {request.form.get("producto")} fue recibido 💗</p>
+    <a href="/">Volver a la tienda</a>
+    </body></html>"""
 
 @app.route("/admin")
-def admin():
-    filas = "".join([f"<tr><td style='padding:10px;border:1px solid #ddd'>{p['cliente']}</td><td style='padding:10px;border:1px solid #ddd'>{p['telefono']}</td><td style='padding:10px;border:1px solid #ddd'>{p['producto']}</td></tr>" for p in pedidos])
-    return f"""<html><body style="font-family:Arial;padding:20px;background:#fff0f5"><h1>Pedidos Selin Beauty 💗</h1><p>Total: {len(pedidos)}</p><table style="background:white;width:100%"><tr><th>Cliente</th><th>Telefono</th><th>Producto</th></tr>{filas}</table><br><a href="/">Volver</a></body></html>"""
+def administrador():
+    filas = "".join([f"<tr><td style='padding:10px;border:1px solid pink;'>{x['nombre']}</td><td style='padding:10px;border:1px solid pink;'>{x['producto']}</td></tr>" for x in pedidos])
+    return f"""<html><body style="font-family:Arial;background:white;padding:20px;">
+    <h1>Pedidos Selin Beauty</h1>
+    <table><tr><th>Cliente</th><th>Producto</th></tr>{filas}</table>
+    <br><a href="/">Volver</a>
+    </body></html>"""
