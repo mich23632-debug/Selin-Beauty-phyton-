@@ -3,7 +3,7 @@ from flask import Flask, request
 app = Flask(__name__)
 pedidos = []
 productos = [
-    {"nombre": "Labial Matte", "precio": 120},
+    {"nombre": "Labial Matte", "precio": 120, "foto": "https://raw.githubusercontent.com/mich23632-debug/Selin-Beauty-phyton-/principal/IMG_e3e15905-9769-46ac-bc43-37c23d5800d2.png"},
     {"nombre": "Base liquida", "precio": 250},
     {"nombre": "Sombras Palette", "precio": 300},
     {"nombre": "Rimel Volumen", "precio": 150},
@@ -16,7 +16,7 @@ def inicio():
     tarjetas = ""
     for p in productos:
         tarjetas += f"""<div style="background:white;padding:20px;border-radius:15px;text-align:center;box-shadow:0 2px 10px #f8bbd0;">
-        <h3 style="color:#d81b60;">{p['nombre']}</h3>
+       <img src="{p['foto']}" style="width:100%;border-radius:10px;"> <h3 style="color:#d81b60;">{p['nombre']}</h3>
         <p style="font-size:20px;">${p['precio']} MXN</p>
         <form action="/pedir" method="POST">
         <input type="hidden" name="producto" value="{p['nombre']}">
