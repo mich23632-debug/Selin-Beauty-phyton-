@@ -3,7 +3,7 @@ from flask import Flask, request
 app = Flask(__name__)
 pedidos = []
 productos = [
-    {"nombre": "Labial Matte", "precio": 120, "foto": "https://raw.githubusercontent.com/mich23632-debug/Selin-Beauty-phyton-/principal/IMG_e3e15905-9769-46ac-bc43-37c23d5800d2.png"},
+    {"nombre": "Labial Matte", "precio": 120, "foto":https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600
     {"nombre": "Base liquida", "precio": 250},
     {"nombre": "Sombras Palette", "precio": 300},
     {"nombre": "Rimel Volumen", "precio": 150},
