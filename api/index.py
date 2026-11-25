@@ -16,7 +16,7 @@ def inicio():
     tarjetas = ""
     for p in productos:
         tarjetas += f"""<div style="background:white;padding:20px;border-radius:15px;text-align:center;box-shadow:0 2px 10px #f8bbd0;">
-       p.get('foto','') style="width:100%;border-radius:10px;"> <h3 style="color:#d81b60;">{p['nombre']}</h3>
+        <img src="{p.get('foto','')}" style="width:100%;border-radius:10px;"><h3 style="color:#d81b60;">{p['nombre']}</h3>
         <p style="font-size:20px;">${p['precio']} MXN</p>
         <form action="/pedir" method="POST">
         <input type="hidden" name="producto" value="{p['nombre']}">
