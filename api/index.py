@@ -3,15 +3,14 @@ from flask import Flask, request
 app = Flask(__name__)
 pedidos = []
 productos = [
-{"nombre":"Labial Matte","precio":120,"foto":"https://picsum.photos/seed/labial/600/400"},
-{"nombre":"Base liquida","precio":250,"foto":"https://picsum.photos/seed/base/600/400"},
-{"nombre":"Sombras Palette","precio":300,"foto":"https://picsum.photos/seed/sombras/600/400"},
-{"nombre":"Rimel Volumen","precio":150,"foto":"https://picsum.photos/seed/rimel/600/400"},
+{"nombre":"Labial Matte","precio":120,"foto":"https://adn-static3.nykaa.com/media/catalog/product/6/9/6902395681427.jpg"},
+{"nombre":"Base liquida","precio":250,"foto":"https://images.shop.frankfurt-airport.com/pim/defaults/862x,webp/catalog/4/4/7/d/447d26e8375ffafe9b014a3810ed0a9f_1132595.jpg"},
+{"nombre":"Sombras Palette","precio":300,"foto":"https://images-static.nykaa.com/media/catalog/product/9/f/9f32d63MACXX00001232_1.jpg"},
+{"nombre":"Rimel Volumen","precio":150,"foto":"https://i.pinimg.com/originals/df/ad/f2/dfadf2dd15c4f8a1663339890e006940.webp"},
 {"nombre":"Rubor Rosado","precio":130,"foto":"https://picsum.photos/seed/rubor/600/400"},
-{"nombre":"Kit Brochas","precio":280,"foto":"https://picsum.photos/seed/brochas/600/400"},
-]
-]
+{"nombre":"Kit Brochas","precio":280,"foto":"https://m.media-amazon.com/images/S/aplus-media-library-service-media/db148df3-2612-4dbd-9d23-f3d38d15f950.__CR0,0,970,600_PT0_SX970_V1___.jpg"},
 
+]
 @app.route("/")
 def inicio():
     tarjetas = ""
