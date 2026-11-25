@@ -4,11 +4,11 @@ app = Flask(__name__)
 pedidos = []
 productos = [
     {"nombre": "Labial Matte", "precio": 120, "foto":"https://picsum.photos/seed/labial/600/400"},
-    {"nombre": "Base liquida", "precio": 250},
-    {"nombre": "Sombras Palette", "precio": 300},
-    {"nombre": "Rimel Volumen", "precio": 150},
-    {"nombre": "Rubor Rosado", "precio": 130},
-    {"nombre": "Kit Brochas", "precio": 280},
+    {"nombre": "Base liquida", "precio": 250,"foto""https://picsum.photos/seed/base/600/400"},
+    {"nombre": "Sombras Palette", "precio": 300,"foto":"https://picsum.photos/seed/sombras/600/400"},
+    {"nombre": "Rimel Volumen", "precio": 150,"foto":"https://picsum.photos/seed/rimel/600/400"},
+    {"nombre": "Rubor Rosado", "precio": 130,"foto":"https://picsum.photos/seed/rubor/600/400"},
+    {"nombre": "Kit Brochas", "precio": 280,"foto":"https://picsum.photos/seed/brochas/600/400"},
 ]
 
 @app.route("/")
